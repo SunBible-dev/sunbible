@@ -6,15 +6,16 @@
   <!-- SUNBIBLE -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
   <title>SUNBIBLE</title>
-  <link rel="shortcut icon" type="image/x-icon" href="./img/SUNBIBLE_ICON.svg" />
+  <link rel="shortcut icon" type="image/x-icon" href="./img/SUNBIBLE_ICON_white.svg" />
+
+  <!-- Content-Security-Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self';">
+
 
   <!-- style imports -->
-  <style>
-    @import url('./css/main.css');
-  </style>
+  <link rel="stylesheet" href="./css/main.css">
 
 </head>
 
@@ -24,7 +25,7 @@
 
   <!-- Main UI-->
   <article>
-    
+
   </article>
 
   <!-- Additional UI - HTML components -->
