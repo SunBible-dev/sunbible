@@ -126,7 +126,7 @@ function loadBibleContent(bookName, chapterNum) {
         console.log(`Parsed book data:`, bookData);
         
         if (bookData && bookData.chapters) {
-            const chapterData = bookData.chapters.find(chap => chap.chapter === parseInt(chapterNum));
+            const chapterData = bookData.chapters.find(chap => chap.chapter === chapterNum.toString());
             if (chapterData) {
                 loadBibleData({ book: bookName, chapters: [chapterData] });
                 saveCurrentView(bookName, chapterNum);
@@ -158,21 +158,25 @@ async function initializeApp() {
         updateDownloadStatus("Download complete");
         document.getElementById('FIRST_TIME_DOWNLOAD').style.display = 'none';
         
-        // Always start with Genesis Chapter 1 on first load
+        // Check URL parameters first, then localStorage, then default to Genesis 1
         const urlParams = new URLSearchParams(window.location.search);
         const section = urlParams.get('section') || 'SUNBIBLE_bible';
-        const book = 'Genesis';
-        const chapter = '1';
+        const book = urlParams.get('book') || localStorage.getItem('currentBook') || 'Genesis';
+        const chapter = parseInt(urlParams.get('chapter') || localStorage.getItem('currentChapter') || '1');
         
-        showSection('SUNBIBLE_bible');
-        loadBibleContent(book, chapter);
-        saveCurrentView(book, chapter);
-        updateUrlParameters('SUNBIBLE_bible', book, chapter);
+        showSection(section);
+        if (section === 'SUNBIBLE_bible') {
+            loadBibleContent(book, chapter);
+            saveCurrentView(book, chapter);
+            updateUrlParameters(section, book, chapter);
+        } else {
+            updateUrlParameters(section);
+        }
     } else {
         updateDownloadStatus("Download failed");
         showSection('FIRST_TIME_DOWNLOAD');
     }
-    console.log("App initialized with Genesis chapter 1");
+    console.log(`App initialized with ${book} chapter ${chapter}`);
 }
 
 // Initialize the app when DOM is ready
