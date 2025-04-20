@@ -100,7 +100,14 @@ function updateUrlParameters(sectionId, book = "", chapter = "") {
 function setupNavigation() {
     document.querySelector(".BIBLE_loader").addEventListener("click", () => showSection("SUNBIBLE_bible"));
     document.querySelector(".NAV_loader").addEventListener("click", () => showSection("SUNBIBLE_CONTENTS"));
-    document.querySelector(".THEME_loader").addEventListener("click", () => showSection("SUNBIBLE_theme"));
+    document.querySelector(".THEME_loader").addEventListener("click", () => {
+      showSection("SUNBIBLE_theme");
+      const lastBook = localStorage.getItem("currentBook") || "Genesis";
+      const lastChapter = parseInt(localStorage.getItem("currentChapter") || "1");
+      loadBibleContent(lastBook, lastChapter);
+      saveCurrentView(lastBook, lastChapter);
+      updateUrlParameters("SUNBIBLE_bible", lastBook, lastChapter);
+    });
     console.log("Navigation setup complete");
 }
 
