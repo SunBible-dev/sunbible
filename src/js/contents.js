@@ -28,7 +28,7 @@ function loadContents() {
         const chapterLink = document.createElement('a');
         chapterLink.className = 'chapter_link';
         chapterLink.textContent = `${i}`;
-        chapterLink.href = `#chapter_${bookName}_${i}`; // Add href to jump to chapter
+        chapterLink.href = `?section=SUNBIBLE_bible#${bookName}_${i}`; // Update href to reflect SUNBIBLE_bible section
         chapterLink.addEventListener('click', () => {
           saveCurrentView(bookName, i); // Save current view to local storage
         });

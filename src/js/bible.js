@@ -134,9 +134,11 @@ window.onload = initializeApp;
 
 // Function to load the last viewed book and chapter from local storage
 document.addEventListener('DOMContentLoaded', () => {
-  const savedBook = localStorage.getItem('currentBook');
-  const savedChapter = localStorage.getItem('currentChapter');
-  if (savedBook && savedChapter) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const section = urlParams.get('section');
+  const savedBook = urlParams.get('book') || localStorage.getItem('currentBook');
+  const savedChapter = urlParams.get('chapter') || localStorage.getItem('currentChapter');
+  if (section === 'SUNBIBLE_bible' && savedBook && savedChapter) {
     fetchBibleData(savedBook).then(data => {
       const chapterData = data.chapters.find(chap => chap.chapter === parseInt(savedChapter));
       loadBibleData({ book: savedBook, chapters: [chapterData] });
