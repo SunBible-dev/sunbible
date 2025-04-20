@@ -169,6 +169,7 @@ async function initializeApp() {
             loadBibleContent(book, chapter);
             saveCurrentView(book, chapter);
             updateUrlParameters(section, book, chapter);
+            console.log(`App initialized with ${book} chapter ${chapter}`);
         } else {
             updateUrlParameters(section);
         }
@@ -176,7 +177,6 @@ async function initializeApp() {
         updateDownloadStatus("Download failed");
         showSection('FIRST_TIME_DOWNLOAD');
     }
-    console.log(`App initialized with ${book} chapter ${chapter}`);
 }
 
 // Initialize the app when DOM is ready
