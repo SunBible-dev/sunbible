@@ -1,0 +1,26 @@
+nav {
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 5px;
+    left: 10px;
+    right: 10px;
+    padding: 5px;
+    max-height: 30px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+
+
+nav a {
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.777);
+    padding: 2px;
+    border-radius: 5px;
+    color: black;
+    mix-blend-mode: difference;
+}
+nav a:hover {
+    background: #ffffff;
+}
