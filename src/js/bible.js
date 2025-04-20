@@ -131,3 +131,29 @@ async function initializeApp() {
 window.onload = initializeApp;
 
 
+
+// Function to load the last viewed book and chapter from local storage
+function loadLastViewed() {
+    const lastViewed = localStorage.getItem('lastViewed');
+    if (lastViewed) {
+        const { book, chapter } = JSON.parse(lastViewed);
+        console.log(`Loading last viewed book: ${book}, chapter: ${chapter}`);
+        // Logic to load the book and chapter
+        loadBibleData({ book, chapters: [{ chapter }] });
+    } else {
+        console.log('No last viewed book found, loading Genesis.');
+        // Logic to load Genesis
+        loadBibleData({ book: 'Genesis', chapters: [{ chapter: 1 }] });
+    }
+}
+
+// Function to save the current book and chapter to local storage
+function saveCurrentView(book, chapter) {
+    localStorage.setItem('lastViewed', JSON.stringify({ book, chapter }));
+    console.log(`Saved current view: book ${book}, chapter ${chapter}`);
+}
+
+// Call the function to load the last viewed book on page load
+document.addEventListener('DOMContentLoaded', loadLastViewed);
+
+

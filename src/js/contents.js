@@ -28,6 +28,10 @@ function loadContents() {
         const chapterLink = document.createElement('a');
         chapterLink.className = 'chapter_link';
         chapterLink.textContent = `${i}`;
+        chapterLink.href = `#chapter_${bookName}_${i}`; // Add href to jump to chapter
+        chapterLink.addEventListener('click', () => {
+          saveCurrentView(bookName, i); // Save current view to local storage
+        });
         dropdownContent.appendChild(chapterLink);
       }
 
