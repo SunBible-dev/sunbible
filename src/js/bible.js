@@ -37,9 +37,9 @@ function loadBibleData(data) {
             const chapterDiv = document.createElement("div");
             chapterDiv.classList.add("SUNBIBLE_bible_book_chapter");
             chapterDiv.innerHTML = `<h1><span class="book_name">${data.book}</span> <span class="chapter_number">${chapter.chapter}</span></h1>` +
-                chapter.verses.map(verse => 
+                (chapter.verses ? chapter.verses.map(verse => 
                     `<p class="bible_book_chapter_verse"><span class="verse_number">${verse.verse}</span> <span class="verse_text">${verse.text}</span></p>`
-                ).join('');
+                ).join('') : '');
             chapterContainer.appendChild(chapterDiv);
         });
         console.log("Bible data loaded into UI:", data);
@@ -138,12 +138,14 @@ function loadLastViewed() {
     if (lastViewed) {
         const { book, chapter } = JSON.parse(lastViewed);
         console.log(`Loading last viewed book: ${book}, chapter: ${chapter}`);
-        // Logic to load the book and chapter
-        loadBibleData({ book, chapters: [{ chapter }] });
+        const bookData = JSON.parse(localStorage.getItem(book));
+        if (bookData) {
+            loadBibleData({ book, chapters: bookData.chapters.filter(ch => ch.chapter === chapter) });
+        }
     } else {
         console.log('No last viewed book found, loading Genesis.');
-        // Logic to load Genesis
-        loadBibleData({ book: 'Genesis', chapters: [{ chapter: 1 }] });
+        const genesisData = JSON.parse(localStorage.getItem("Genesis"));
+        loadBibleData(genesisData);
     }
 }
 
