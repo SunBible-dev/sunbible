@@ -3,5 +3,5 @@ function logHello() {
     console.log("👋 Hello, Welcome to SunBible!");
 }
 
-// Call the function on page load
-window.onload = logHello;
+// Call the function when DOM is ready
+document.addEventListener('DOMContentLoaded', logHello);

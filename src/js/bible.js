@@ -34,13 +34,15 @@ function loadBibleData(data) {
     if (data && data.book && data.chapters) {
         bookElement.textContent = data.book;
         data.chapters.forEach(chapter => {
-            const chapterDiv = document.createElement("div");
-            chapterDiv.classList.add("SUNBIBLE_bible_book_chapter");
-            chapterDiv.innerHTML = `<h1><span class="book_name">${data.book}</span> <span class="chapter_number">${chapter.chapter}</span></h1>` +
-                (chapter.verses ? chapter.verses.map(verse => 
-                    `<p class="bible_book_chapter_verse"><span class="verse_number">${verse.verse}</span> <span class="verse_text">${verse.text}</span></p>`
-                ).join('') : '');
-            chapterContainer.appendChild(chapterDiv);
+            if (chapter) {
+                const chapterDiv = document.createElement("div");
+                chapterDiv.classList.add("SUNBIBLE_bible_book_chapter");
+                chapterDiv.innerHTML = `<h1><span class="book_name">${data.book}</span> <span class="chapter_number">${chapter.chapter}</span></h1>` +
+                    (chapter.verses ? chapter.verses.map(verse => 
+                        `<p class="bible_book_chapter_verse"><span class="verse_number">${verse.verse}</span> <span class="verse_text">${verse.text}</span></p>`
+                    ).join('') : '');
+                chapterContainer.appendChild(chapterDiv);
+            }
         });
         console.log("Bible data loaded into UI:", data);
     }
@@ -111,40 +113,70 @@ async function fetchAndStoreBibleData() {
     }
 }
 
+// Function to load Bible content from local storage
+function loadBibleContent(bookName, chapterNum) {
+    try {
+        console.log(`Attempting to load ${bookName} from localStorage`);
+        const storedData = localStorage.getItem(bookName);
+        if (!storedData) {
+            console.error(`${bookName} not found in localStorage`);
+            return;
+        }
+        const bookData = JSON.parse(storedData);
+        console.log(`Parsed book data:`, bookData);
+        
+        if (bookData && bookData.chapters) {
+            const chapterData = bookData.chapters.find(chap => chap.chapter === parseInt(chapterNum));
+            if (chapterData) {
+                loadBibleData({ book: bookName, chapters: [chapterData] });
+                saveCurrentView(bookName, chapterNum);
+                updateUrlParameters('SUNBIBLE_bible', bookName, chapterNum);
+                console.log(`Successfully loaded ${bookName} chapter ${chapterNum} from local storage`);
+            } else {
+                console.error(`Chapter ${chapterNum} not found in ${bookName}`);
+            }
+        } else {
+            console.error(`Invalid book data structure for ${bookName}`);
+        }
+    } catch (error) {
+        console.error(`Error loading Bible content for ${bookName}:`, error);
+    }
+}
+
 // Function to initialize the app
 async function initializeApp() {
     setupNavigation();
-    await fetchAndStoreBibleData();
-    const downloadComplete = localStorage.getItem("downloadComplete");
+    let downloadComplete = localStorage.getItem("downloadComplete");
+    
+    if (downloadComplete !== "true") {
+        showSection('FIRST_TIME_DOWNLOAD');
+        await fetchAndStoreBibleData();
+        downloadComplete = localStorage.getItem("downloadComplete");
+    }
+
     if (downloadComplete === "true") {
         updateDownloadStatus("Download complete");
-        const genesisData = JSON.parse(localStorage.getItem("Genesis"));
-        loadBibleData(genesisData);
-        showSection("SUNBIBLE_bible");
+        document.getElementById('FIRST_TIME_DOWNLOAD').style.display = 'none';
+        
+        // Always start with Genesis Chapter 1 on first load
+        const urlParams = new URLSearchParams(window.location.search);
+        const section = urlParams.get('section') || 'SUNBIBLE_bible';
+        const book = 'Genesis';
+        const chapter = '1';
+        
+        showSection('SUNBIBLE_bible');
+        loadBibleContent(book, chapter);
+        saveCurrentView(book, chapter);
+        updateUrlParameters('SUNBIBLE_bible', book, chapter);
     } else {
         updateDownloadStatus("Download failed");
+        showSection('FIRST_TIME_DOWNLOAD');
     }
-    console.log("App initialized");
+    console.log("App initialized with Genesis chapter 1");
 }
 
-// Initialize the app on page load
-window.onload = initializeApp;
-
-
-
-// Function to load the last viewed book and chapter from local storage
-document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const section = urlParams.get('section');
-  const savedBook = urlParams.get('book') || localStorage.getItem('currentBook');
-  const savedChapter = urlParams.get('chapter') || localStorage.getItem('currentChapter');
-  if (section === 'SUNBIBLE_bible' && savedBook && savedChapter) {
-    fetchBibleData(savedBook).then(data => {
-      const chapterData = data.chapters.find(chap => chap.chapter === parseInt(savedChapter));
-      loadBibleData({ book: savedBook, chapters: [chapterData] });
-    });
-  }
-});
+// Initialize the app when DOM is ready
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 function saveCurrentView(bookName, chapter) {
   localStorage.setItem('currentBook', bookName);

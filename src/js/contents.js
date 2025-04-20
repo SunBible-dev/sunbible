@@ -28,9 +28,12 @@ function loadContents() {
         const chapterLink = document.createElement('a');
         chapterLink.className = 'chapter_link';
         chapterLink.textContent = `${i}`;
-        chapterLink.href = `?section=SUNBIBLE_bible#${bookName}_${i}`; // Update href to reflect SUNBIBLE_bible section
-        chapterLink.addEventListener('click', () => {
-          saveCurrentView(bookName, i); // Save current view to local storage
+        chapterLink.href = `?section=SUNBIBLE_bible&book=${bookName}&chapter=${i}`;
+        chapterLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          saveCurrentView(bookName, i);
+          loadBibleContent(bookName, i);
+          showSection('SUNBIBLE_bible');
         });
         dropdownContent.appendChild(chapterLink);
       }
