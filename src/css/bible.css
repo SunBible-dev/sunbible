@@ -4,3 +4,10 @@
 #SUNBIBLE_bible {
     overflow-y: auto; /* Use 'auto' to enable scrolling only when necessary */
 }
+
+.SUNBIBLE_bible_book_chapter h1 {
+    position: sticky;
+    top: 0px;
+    background-color: var(--color-foreground);
+    padding: 3px;
+}

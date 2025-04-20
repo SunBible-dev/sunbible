@@ -29,13 +29,19 @@ function updateDownloadStatus(status) {
 // Function to load Bible data into the UI
 function loadBibleData(data) {
     const bookElement = document.getElementById("SUNBIBLE_bible_book_name");
-    const chapterElement = document.querySelector(".SUNBIBLE_bible_book_chapter");
+    const chapterContainer = document.getElementById("SUNBIBLE_bible_book");
+    chapterContainer.innerHTML = "";
     if (data && data.book && data.chapters) {
         bookElement.textContent = data.book;
-        const chapter = data.chapters[0]; // Load the first chapter
-        chapterElement.innerHTML = chapter.verses.map(verse => 
-            `<p class="bible_book_chapter_verse"><span class="verse_number">${verse.verse}</span> <span class="verse_text">${verse.text}</span></p>`
-        ).join('');
+        data.chapters.forEach(chapter => {
+            const chapterDiv = document.createElement("div");
+            chapterDiv.classList.add("SUNBIBLE_bible_book_chapter");
+            chapterDiv.innerHTML = `<h1><span class="book_name">${data.book}</span> <span class="chapter_number">${chapter.chapter}</span></h1>` +
+                chapter.verses.map(verse => 
+                    `<p class="bible_book_chapter_verse"><span class="verse_number">${verse.verse}</span> <span class="verse_text">${verse.text}</span></p>`
+                ).join('');
+            chapterContainer.appendChild(chapterDiv);
+        });
         console.log("Bible data loaded into UI:", data);
     }
 }
