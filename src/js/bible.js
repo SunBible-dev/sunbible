@@ -42,20 +42,10 @@ function loadBibleData(data) {
         bibleSection.appendChild(bookContainer);
     }
 
-    // Ensure the book name element exists
-    let bookElement = document.getElementById("SUNBIBLE_bible_book_name");
-    if (!bookElement) {
-        bookElement = document.createElement("h1");
-        bookElement.id = "SUNBIBLE_bible_book_name";
-        bookContainer.insertBefore(bookElement, bookContainer.firstChild);
-    }
-
     // Clear existing content and load new data
     bookContainer.innerHTML = "";
-    bookContainer.appendChild(bookElement);
 
     if (data && data.book && data.chapters) {
-        bookElement.textContent = data.book;
         data.chapters.forEach(chapter => {
             if (chapter) {
                 const chapterDiv = document.createElement("div");
