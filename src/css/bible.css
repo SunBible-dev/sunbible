@@ -2,7 +2,7 @@
 
 #SUNBIBLE_bible {
     background-color: var(--color-foreground);
-    border-radius: 20px;
+    border-radius: 10px;
     position: fixed;
     top: 10px;
     bottom: 35px;
