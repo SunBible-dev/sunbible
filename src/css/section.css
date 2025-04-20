@@ -18,7 +18,5 @@ section {
     flex-direction: column; /* Stack items vertically */
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
-}
-#FIRST_TIME_DOWNLOAD img {
-    width: 100px;
+    text-align: center; /* Centers text */
 }
