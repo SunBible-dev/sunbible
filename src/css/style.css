@@ -1,7 +1,9 @@
 :root {
   /* main theme */
-  --color-background: #FFC8C8;
-  --color-foreground: #FFFFFF; /* Should be white for */
+  --color-background: #333333; /* This color is for the body bg and is how they set the theme! */
+  --color-background-dark: #CCCCCC;
+  --color-foreground: #FFFFFF; /* Should be white for forground elements bg */
+  --color-text: #000000; /* Should be black for text, so that it contrast with the white elements that it is on. */
   --blend-mode: difference;
   --font-family: "Arial", sans-serif;
   --header-font-family: "Arial Rounded MT Bold", sans-serif;
@@ -12,19 +14,13 @@
   --red-blend-mode: normal;
 }
 
-:root[data-theme="light"] {
-  color-scheme: light;
-}
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
-}
 
 body {
   margin: 0;
   padding: 0;
   background-color: var(--color-background);
-  color: var(--color-foreground);
+  color: var(--color-text);
   mix-blend-mode: var(--blend-mode);
   font-family: var(--font-family);
   min-height: 100vh;
@@ -36,4 +32,16 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font-family);
+}
+
+
+/* DARK THEME */
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background-color: var(--color-background-dark);
+
+  }
+
 }
