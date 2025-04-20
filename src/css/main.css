@@ -3,6 +3,9 @@
 
 @import url('./style.css');
 
+/* elements */
 @import url('./nav.css');
+@import url('./section.css');
+
 @import url('./bible.css');
 @import url('./download.css');

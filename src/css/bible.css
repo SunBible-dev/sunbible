@@ -1,12 +1,2 @@
 /* css for bible */
 
-#SUNBIBLE_bible {
-    background-color: var(--color-foreground);
-    border-radius: 10px;
-    position: fixed;
-    top: 10px;
-    bottom: 35px;
-    left: 10px;
-    right: 10px;
-    padding: 10px;
-}
