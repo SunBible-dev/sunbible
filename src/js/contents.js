@@ -6,8 +6,21 @@
 // Function to load and display contents
 function loadContents() {
   const contentsData = localStorage.getItem('contents');
-  if (contentsData) {
-    const data = JSON.parse(contentsData);
+  if (!contentsData) {
+    // Create default contents data for Bible books
+    const defaultBooks = ["Genesis", "1Chronicles", "1Corinthians", "1John", "1Kings", "1Peter", "1Samuel", "1Thessalonians", "1Timothy", "2Chronicles", "2Corinthians", "2John", "2Kings", "2Peter", "2Samuel", "2Thessalonians", "2Timothy", "3John", "Acts", "Amos", "Books", "Colossians", "Daniel", "Deuteronomy", "Ecclesiastes", "Ephesians", "Esther", "Exodus", "Ezekiel", "Ezra", "Galatians", "Habakkuk", "Haggai", "Hebrews", "Hosea", "Isaiah", "James", "Jeremiah", "Job", "Joel", "John", "Jonah", "Joshua", "Jude", "Judges", "Lamentations", "Leviticus", "Luke", "Malachi", "Mark", "Matthew", "Micah", "Nahum", "Nehemiah", "Numbers", "Obadiah", "Philemon", "Philippians", "Proverbs", "Psalms", "Revelation", "Romans", "Ruth", "SongofSolomon", "Titus", "Zechariah", "Zephaniah"];
+    const contentsData = {
+      books: defaultBooks.map((name, id) => ({
+        id: id + 1,
+        name: name,
+        chapters: 150 // Set a large enough number to cover all possible chapters
+      }))
+    };
+    localStorage.setItem('contents', JSON.stringify(contentsData));
+  }
+
+  try {
+    const data = JSON.parse(contentsData || localStorage.getItem('contents'));
     const contentsSection = document.getElementById('SUNBIBLE_CONTENTS');
     contentsSection.innerHTML = '<h1>CONTENTS</h1>'; // Clear existing contents
 
@@ -41,8 +54,8 @@ function loadContents() {
       bookDiv.appendChild(dropdownContent);
       contentsSection.appendChild(bookDiv);
     });
-  } else {
-    console.error('Error loading contents: Data not found in local storage');
+  } catch (error) {
+    console.error('Error loading contents:', error);
   }
 }
 
