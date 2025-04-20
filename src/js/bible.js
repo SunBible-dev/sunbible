@@ -68,13 +68,43 @@ function setupNavigation() {
     console.log("Navigation setup complete");
 }
 
+// Function to fetch and store Bible data from IPFS
+async function fetchAndStoreBibleData() {
+    const books = ["Genesis", "1Chronicles"];
+    const baseUrl = "https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.dweb.link/";
+    let allDownloaded = true;
+
+    for (const book of books) {
+        const url = `${baseUrl}${book}.json`;
+        try {
+            console.log(`Fetching ${book} data from IPFS: ${url}`);
+            const response = await fetch(url);
+            const data = await response.json();
+            localStorage.setItem(book, JSON.stringify(data));
+            console.log(`${book} data stored in local storage.`);
+        } catch (error) {
+            console.error(`Error fetching ${book} data:`, error);
+            allDownloaded = false;
+        }
+    }
+
+    if (allDownloaded) {
+        localStorage.setItem("downloadComplete", "true");
+        console.log("All books downloaded and stored successfully.");
+    } else {
+        console.log("Some books failed to download.");
+    }
+}
+
 // Function to initialize the app
 async function initializeApp() {
     setupNavigation();
-    const bibleData = await fetchBibleData("bafkreifdrb2imosam7cestlhegq3xizq63nic4mdkgwuprjtpuwrnrerdu");
-    if (bibleData) {
+    await fetchAndStoreBibleData();
+    const downloadComplete = localStorage.getItem("downloadComplete");
+    if (downloadComplete === "true") {
         updateDownloadStatus("Download complete");
-        loadBibleData(bibleData);
+        const genesisData = JSON.parse(localStorage.getItem("Genesis"));
+        loadBibleData(genesisData);
         showSection("SUNBIBLE_bible");
     } else {
         updateDownloadStatus("Download failed");
