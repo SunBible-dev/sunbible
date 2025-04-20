@@ -1,2 +1,6 @@
 /* css for bible */
 
+
+#SUNBIBLE_bible {
+    overflow-y: auto; /* Use 'auto' to enable scrolling only when necessary */
+}

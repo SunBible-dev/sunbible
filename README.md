@@ -12,9 +12,8 @@ pnpm dev # for a python dev server
 ```
 
 ipfs gateway
-- https://w3s.link/ipfs/
-
-
+- https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.dweb.link/
+- https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/
 ---
 
 
