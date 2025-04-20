@@ -181,21 +181,14 @@ async function initializeApp() {
         updateDownloadStatus("Download complete");
         document.getElementById('FIRST_TIME_DOWNLOAD').style.display = 'none';
         
-        // Always load Genesis 1 after first download
-        if (downloadComplete === localStorage.getItem("downloadComplete")) {
-            showSection('SUNBIBLE_bible');
-            loadBibleContent('Genesis', 1);
-            saveCurrentView('Genesis', 1);
-            updateUrlParameters('SUNBIBLE_bible', 'Genesis', 1);
-            console.log('App initialized with Genesis 1 after download');
-            return;
-        }
-        
-        // For subsequent loads, check URL parameters, then localStorage
         const urlParams = new URLSearchParams(window.location.search);
         const section = urlParams.get('section') || 'SUNBIBLE_bible';
-        const book = urlParams.get('book') || localStorage.getItem('currentBook') || 'Genesis';
-        const chapter = parseInt(urlParams.get('chapter') || localStorage.getItem('currentChapter') || '1');
+        const lastBook = localStorage.getItem('currentBook');
+        const lastChapter = localStorage.getItem('currentChapter');
+        
+        // Use URL parameters first, then localStorage, then default to Genesis 1
+        const book = urlParams.get('book') || lastBook || 'Genesis';
+        const chapter = parseInt(urlParams.get('chapter') || lastChapter || '1');
         
         showSection(section);
         if (section === 'SUNBIBLE_bible') {
