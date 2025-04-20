@@ -10,6 +10,9 @@ section {
     padding: 10px;
 
     display: none;
+
+    overflow-y: auto; /* Use 'auto' to enable scrolling only when necessary */
+
 }
 
 #FIRST_TIME_DOWNLOAD {
