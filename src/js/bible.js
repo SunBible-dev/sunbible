@@ -28,9 +28,32 @@ function updateDownloadStatus(status) {
 
 // Function to load Bible data into the UI
 function loadBibleData(data) {
-    const bookElement = document.getElementById("SUNBIBLE_bible_book_name");
-    const chapterContainer = document.getElementById("SUNBIBLE_bible_book");
-    chapterContainer.innerHTML = "";
+    const bibleSection = document.getElementById("SUNBIBLE_bible");
+    if (!bibleSection) {
+        console.error("Bible section not found");
+        return;
+    }
+
+    // Ensure the book container exists
+    let bookContainer = document.getElementById("SUNBIBLE_bible_book");
+    if (!bookContainer) {
+        bookContainer = document.createElement("div");
+        bookContainer.id = "SUNBIBLE_bible_book";
+        bibleSection.appendChild(bookContainer);
+    }
+
+    // Ensure the book name element exists
+    let bookElement = document.getElementById("SUNBIBLE_bible_book_name");
+    if (!bookElement) {
+        bookElement = document.createElement("h1");
+        bookElement.id = "SUNBIBLE_bible_book_name";
+        bookContainer.insertBefore(bookElement, bookContainer.firstChild);
+    }
+
+    // Clear existing content and load new data
+    bookContainer.innerHTML = "";
+    bookContainer.appendChild(bookElement);
+
     if (data && data.book && data.chapters) {
         bookElement.textContent = data.book;
         data.chapters.forEach(chapter => {
@@ -41,7 +64,7 @@ function loadBibleData(data) {
                     (chapter.verses ? chapter.verses.map(verse => 
                         `<p class="bible_book_chapter_verse"><span class="verse_number">${verse.verse}</span> <span class="verse_text">${verse.text}</span></p>`
                     ).join('') : '');
-                chapterContainer.appendChild(chapterDiv);
+                bookContainer.appendChild(chapterDiv);
             }
         });
         console.log("Bible data loaded into UI:", data);
