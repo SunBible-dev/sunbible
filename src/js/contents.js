@@ -27,7 +27,7 @@ function loadContents() {
       for (let i = 1; i <= book.chapters; i++) {
         const chapterLink = document.createElement('a');
         chapterLink.className = 'chapter_link';
-        chapterLink.textContent = `Chapter ${i}`;
+        chapterLink.textContent = `${i}`;
         dropdownContent.appendChild(chapterLink);
       }
 
