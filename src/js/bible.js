@@ -133,29 +133,20 @@ window.onload = initializeApp;
 
 
 // Function to load the last viewed book and chapter from local storage
-function loadLastViewed() {
-    const lastViewed = localStorage.getItem('lastViewed');
-    if (lastViewed) {
-        const { book, chapter } = JSON.parse(lastViewed);
-        console.log(`Loading last viewed book: ${book}, chapter: ${chapter}`);
-        const bookData = JSON.parse(localStorage.getItem(book));
-        if (bookData) {
-            loadBibleData({ book, chapters: bookData.chapters.filter(ch => ch.chapter === chapter) });
-        }
-    } else {
-        console.log('No last viewed book found, loading Genesis.');
-        const genesisData = JSON.parse(localStorage.getItem("Genesis"));
-        loadBibleData(genesisData);
-    }
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const savedBook = localStorage.getItem('currentBook');
+  const savedChapter = localStorage.getItem('currentChapter');
+  if (savedBook && savedChapter) {
+    fetchBibleData(savedBook).then(data => {
+      const chapterData = data.chapters.find(chap => chap.chapter === parseInt(savedChapter));
+      loadBibleData({ book: savedBook, chapters: [chapterData] });
+    });
+  }
+});
 
-// Function to save the current book and chapter to local storage
-function saveCurrentView(book, chapter) {
-    localStorage.setItem('lastViewed', JSON.stringify({ book, chapter }));
-    console.log(`Saved current view: book ${book}, chapter ${chapter}`);
+function saveCurrentView(bookName, chapter) {
+  localStorage.setItem('currentBook', bookName);
+  localStorage.setItem('currentChapter', chapter);
 }
-
-// Call the function to load the last viewed book on page load
-document.addEventListener('DOMContentLoaded', loadLastViewed);
 
 
