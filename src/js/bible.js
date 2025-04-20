@@ -73,6 +73,11 @@ function loadBibleData(data) {
 
 // Function to show a section and update URL parameters
 function showSection(sectionId) {
+    // If download is complete and trying to show download section, redirect to Bible
+    if (localStorage.getItem("downloadComplete") === "true" && sectionId === "FIRST_TIME_DOWNLOAD") {
+        sectionId = "SUNBIBLE_bible";
+    }
+    
     const sections = document.querySelectorAll("section");
     sections.forEach(section => section.style.display = "none");
     const activeSection = document.getElementById(sectionId);
@@ -171,18 +176,13 @@ async function initializeApp() {
     setupNavigation();
     let downloadComplete = localStorage.getItem("downloadComplete");
     
-    if (downloadComplete !== "true") {
-        showSection('FIRST_TIME_DOWNLOAD');
-        await fetchAndStoreBibleData();
-        downloadComplete = localStorage.getItem("downloadComplete");
-    }
-
     if (downloadComplete === "true") {
-        updateDownloadStatus("Download complete");
+        // Hide download section and show Bible content immediately
         document.getElementById('FIRST_TIME_DOWNLOAD').style.display = 'none';
+        updateDownloadStatus("Download complete");
         
         const urlParams = new URLSearchParams(window.location.search);
-        const section = urlParams.get('section') || 'SUNBIBLE_bible';
+        const section = urlParams.get('section') === 'FIRST_TIME_DOWNLOAD' ? 'SUNBIBLE_bible' : (urlParams.get('section') || 'SUNBIBLE_bible');
         const lastBook = localStorage.getItem('currentBook');
         const lastChapter = localStorage.getItem('currentChapter');
         
@@ -195,13 +195,23 @@ async function initializeApp() {
             loadBibleContent(book, chapter);
             saveCurrentView(book, chapter);
             updateUrlParameters(section, book, chapter);
-            console.log(`App initialized with ${book} chapter ${chapter}`);
         } else {
             updateUrlParameters(section);
         }
-    } else {
-        updateDownloadStatus("Download failed");
+    } else if (!downloadComplete) {
         showSection('FIRST_TIME_DOWNLOAD');
+        await fetchAndStoreBibleData();
+        downloadComplete = localStorage.getItem("downloadComplete");
+        
+        if (downloadComplete === "true") {
+            // Redirect to Bible section after successful download
+            showSection('SUNBIBLE_bible');
+            loadBibleContent('Genesis', 1);
+            saveCurrentView('Genesis', 1);
+            updateUrlParameters('SUNBIBLE_bible', 'Genesis', 1);
+        } else {
+            updateDownloadStatus("Download failed");
+        }
     }
 }
 
