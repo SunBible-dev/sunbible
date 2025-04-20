@@ -7,8 +7,8 @@
 ### Dev and Build
 
 ```sh
-pnpm i install # nothing to install
-pnpm dev # for a dev server
+pnpm i # nothing to install
+pnpm dev # for a python dev server
 ```
 
 ipfs gateway
