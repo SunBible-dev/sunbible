@@ -150,10 +150,10 @@ function loadBibleContent(bookName, chapterNum) {
         const bookData = JSON.parse(storedData);
         console.log(`Parsed book data:`, bookData);
         
-        if (bookData && bookData.chapters) {
+        if (bookData && bookData.book && bookData.chapters) {
             const chapterData = bookData.chapters.find(chap => chap.chapter === chapterNum.toString());
             if (chapterData) {
-                loadBibleData({ book: bookName, chapters: [chapterData] });
+                loadBibleData({ book: bookData.book, chapters: [chapterData] });
                 saveCurrentView(bookName, chapterNum);
                 updateUrlParameters('SUNBIBLE_bible', bookName, chapterNum);
                 console.log(`Successfully loaded ${bookName} chapter ${chapterNum} from local storage`);
