@@ -29,18 +29,13 @@
     padding: 10px; /* Padding for better appearance */
     border: 1px solid var(--color-text); /* Border using text color variable */
     border-radius: 5px; /* Rounded corners */
-    background-color: var(--color-background-dark); /* Background color */
-    color: var(--color-foreground); /* Text color */
     font-size: var(--font-size); /* Font size */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     appearance: none; /* Remove default styling */
     cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-#SETTINGS_FONT_select:hover {
-    background-color: var(--color-background); /* Change background color on hover */
-}
+
 
 
 

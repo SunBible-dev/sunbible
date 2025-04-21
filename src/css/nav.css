@@ -9,6 +9,7 @@ nav {
     text-align: center;
     border-radius: 10px;
     font-family: var(--header-font-family);
+    font-size: 20px;
 }
 
 
