@@ -7,7 +7,7 @@
 ### Dev and Build
 
 ```sh
-pnpm i # nothing to install
+pnpm i
 pnpm dev # for a python dev server
 ```
 

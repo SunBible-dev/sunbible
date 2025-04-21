@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "source": "src/index.html",
   "scripts": {
-    "dev": "python -m http.server --directory src 7070"
+    "dev": "python -m http.server --directory src 7070",
+    "web4_test": "web4-deploy src sunbible.testnet --nearfs"
   },
-  "packageManager": "pnpm@10.8.1"
+  "packageManager": "pnpm@10.8.1",
+  "devDependencies": {
+    "web4-deploy": "^0.8.0"
+  }
 }
