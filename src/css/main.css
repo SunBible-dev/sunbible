@@ -7,6 +7,7 @@
 @import url('./nav.css');
 @import url('./section.css');
 
+/* pages */
 @import url('./bible.css');
-@import url('./download.css');
 @import url('./contents.css');
+@import url('./settings.css');
