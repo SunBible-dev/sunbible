@@ -51,7 +51,8 @@
     <!-- .SUNBIBLE_bible_book_chapter -->
     <div id="SUNBIBLE_bible_book">
       <div class="SUNBIBLE_bible_book_chapter"> <!-- will be created for each chapter -->
-        <h1 id="chapter_${bookName}_${chapter}"><span class="book_name"></span> <span class="chapter_number"></span></h1>
+        <h1 id="chapter_${bookName}_${chapter}"><span class="book_name"></span> <span class="chapter_number"></span>
+        </h1>
         <p class="bible_book_chapter_verse"><span class="verse_number"></span> <span class="verse_text"></span></p>
       </div>
     </div>
@@ -77,6 +78,38 @@
   <!-- ⚙️ SETTINGS -->
   <section id="SUNBIBLE_theme">
     <h1>SETTINGS</h1>
+
+    <!-- COLOR -->
+    <div id="SETTINGS_COLOR" class="SUNBIBLE_theme_div">
+      <h3>COLOR</h3>
+    </div>
+
+    <!-- FONT -->
+    <div id="SETTINGS_FONT" class="SUNBIBLE_theme_div">
+      <h3>FONT</h3>
+    </div>
+
+    <!-- BIBLE JSON DATA -->
+    <div id="SETTINGS_BIBLE_DATA" class="SUNBIBLE_theme_div">
+      <h3>BIBLE JSON DATA</h3>
+      <p>
+        The data for SUNBIBLE is in JSON format sotred over IPFS.
+        <br/>
+        You can view it at <a href="https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/">https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/</a>
+        <br/>
+        When you first vist SunBible, it will download the data from IPFS and store it in your browser's local storage.
+        <br/>
+        This way, you can view the Bible even when you are offline.
+        <br/>
+        You can also update the data by clicking the "UPDATE" button below.
+        <br/>
+        If you are experinceing issies with SunBible try clearing your local storage.
+      </p>
+      <p id="LOCAL_STORAGE_SIZE"></p>
+      <button>UPDATE</button>
+      <button>CLEAR</button>
+    </div>
+
   </section>
   <!-- END OF SETTINGS SECTION -->
 

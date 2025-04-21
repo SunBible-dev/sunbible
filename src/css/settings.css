@@ -3,3 +3,17 @@
 #SUNBIBLE_theme {
     text-align: center;
 }
+
+.SUNBIBLE_theme_div {
+    border: 1px solid var(--color-text);
+    border-radius: 7px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.SUNBIBLE_theme_div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%; /* Ensure the div takes full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
