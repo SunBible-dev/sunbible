@@ -9,11 +9,30 @@
     border-radius: 7px;
     margin: 10px;
     padding: 10px;
-}
-
-.SUNBIBLE_theme_div {
     word-wrap: break-word;
     overflow-wrap: break-word;
-    width: 100%; /* Ensure the div takes full width */
+    width: 95%; /* Ensure the div takes full width */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+
+
+/* data buttons  */
+#UPDATE_BIBLE_DATA,
+#CLEAR_BIBLE_DATA {
+    border: none; /* Remove border */
+    color: var(--color-text); /* Use text color variable */
+    padding: 10px 20px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove text decoration */
+    display: inline-block; /* Inline-block display */
+    font-size: var(--font-size); /* Use font size variable */
+    margin: 4px 2px; /* Margin */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#UPDATE_BIBLE_DATA:hover,
+#CLEAR_BIBLE_DATA:hover {
+    opacity: 0.7; /* Slightly darker on hover */;
 }
