@@ -5,7 +5,8 @@
   "source": "src/index.html",
   "scripts": {
     "dev": "python -m http.server --directory src 7070",
-    "web4_test": "web4-deploy src sunbible.testnet --nearfs"
+    "web4_testnet": "web4-deploy src sunbible.testnet --nearfs",
+    "web4_mainnet": "web4-deploy src sunbible.near --nearfs"
   },
   "packageManager": "pnpm@10.8.1",
   "devDependencies": {

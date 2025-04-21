@@ -7,8 +7,13 @@
 ### Dev and Build
 
 ```sh
-pnpm i
-pnpm dev # for a python dev server
+bun i
+bun dev # for a python dev server
+
+# web4 deploy
+NEAR_SIGNER_KEY=ed25519:your_key_here
+bun run web4_testnet
+bun run web4_mainnet
 ```
 
 ipfs gateway for bible json data
