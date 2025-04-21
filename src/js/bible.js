@@ -168,6 +168,33 @@ function loadBibleContent(bookName, chapterNum) {
     }
 }
 
+// Function to clear Bible data from local storage
+function clearBibleData() {
+    localStorage.clear();
+    updateDownloadStatus("Local storage cleared");
+    console.log("Local storage cleared");
+}
+
+// Function to update Bible data
+async function updateBibleData() {
+    await fetchAndStoreBibleData();
+    console.log("Bible data updated");
+}
+
+// Function to calculate and display the size of local storage
+function displayLocalStorageSize() {
+    let totalSize = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
+        totalSize += key.length + value.length;
+    }
+    const sizeInKB = (totalSize / 1024).toFixed(2);
+    const sizeElement = document.getElementById("LOCAL_STORAGE_SIZE");
+    sizeElement.textContent = `Local Storage Size: ${sizeInKB} KB`;
+    console.log("Local storage size displayed:", sizeInKB, "KB");
+}
+
 // Function to initialize the app
 async function initializeApp() {
     setupNavigation();
@@ -210,6 +237,13 @@ async function initializeApp() {
             updateDownloadStatus("Download failed");
         }
     }
+
+    // Display local storage size
+    displayLocalStorageSize();
+
+    // Add event listeners for buttons
+    document.getElementById('UPDATE_BIBLE_DATA').addEventListener('click', updateBibleData);
+    document.getElementById('CLEAR_BIBLE_DATA').addEventListener('click', clearBibleData);
 }
 
 // Initialize the app when DOM is ready
