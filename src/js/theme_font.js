@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Reset font settings
     resetButton.addEventListener('click', function() {
         const defaultFont = fonts[0].value;
-        const defaultFontSize = '16px';
+        const defaultFontSize = '20px';
         document.documentElement.style.setProperty('--font-family', defaultFont);
         document.documentElement.style.setProperty('--header-font-family', defaultFont);
         document.documentElement.style.setProperty('--font-size', defaultFontSize);
         fontSelect.value = defaultFont;
-        fontSizeRange.value = 16;
+        fontSizeRange.value = 20;
         localStorage.removeItem('selectedFont');
         localStorage.removeItem('fontSize');
         console.log('Font settings reset to default');
