@@ -17,9 +17,39 @@
 
 
 
-/* data buttons  */
-#UPDATE_BIBLE_DATA,
-#CLEAR_BIBLE_DATA {
+
+
+
+
+
+/* SETTINGS_FONT_select */
+
+#SETTINGS_FONT_select {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for better appearance */
+    border: 1px solid var(--color-text); /* Border using text color variable */
+    border-radius: 5px; /* Rounded corners */
+    background-color: var(--color-background-dark); /* Background color */
+    color: var(--color-foreground); /* Text color */
+    font-size: var(--font-size); /* Font size */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    appearance: none; /* Remove default styling */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+#SETTINGS_FONT_select:hover {
+    background-color: var(--color-background); /* Change background color on hover */
+}
+
+
+
+
+
+
+
+/* buttons  */
+#SUNBIBLE_theme button {
     border: none; /* Remove border */
     color: var(--color-text); /* Use text color variable */
     padding: 10px 20px; /* Padding */
@@ -32,7 +62,6 @@
     border-radius: 5px; /* Rounded corners */
 }
 
-#UPDATE_BIBLE_DATA:hover,
-#CLEAR_BIBLE_DATA:hover {
+#SUNBIBLE_theme button:hover {
     opacity: 0.7; /* Slightly darker on hover */;
 }

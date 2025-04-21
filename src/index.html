@@ -82,11 +82,18 @@
     <!-- COLOR -->
     <div id="SETTINGS_COLOR" class="SUNBIBLE_theme_div">
       <h3>COLOR</h3>
+      <button>CREAM</button>
+      <button>PINK</button>
+      <button>GRAY</button>
     </div>
 
     <!-- FONT -->
     <div id="SETTINGS_FONT" class="SUNBIBLE_theme_div">
       <h3>FONT</h3>
+      <!--
+      <select name="FONT" id="SETTINGS_FONT_select">
+      </select>
+      -->
     </div>
 
     <!-- BIBLE JSON DATA -->
@@ -94,16 +101,18 @@
       <h3>BIBLE JSON DATA</h3>
       <p>
         The data for SUNBIBLE is in JSON format sotred over IPFS.
-        <br/>
-        You can view it at <a href="https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/">https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/</a>
-        <br/>
+        <br />
+        You can view it at <a
+          href="https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/">https://bafybeiddtdnmeha6kyusdxpabkjecaxfuiwke57hznv4o4vsrti5l5rqoa.ipfs.w3s.link/</a>
+        <br />
         When you first vist SunBible, it will download the data from IPFS and store it in your browser's local storage.
-        <br/>
+        <br />
         This way, you can view the Bible even when you are offline.
-        <br/>
+        <br />
         You can also update the data by clicking the "UPDATE" button below.
-        <br/>
-        If you are experinceing issies with SunBible try clearing your local storage, data will be downloaded again on reload.
+        <br />
+        If you are experinceing issies with SunBible try clearing your local storage, data will be downloaded again on
+        reload.
       </p>
       <p id="LOCAL_STORAGE_SIZE"></p>
       <button id="UPDATE_BIBLE_DATA">UPDATE</button>
