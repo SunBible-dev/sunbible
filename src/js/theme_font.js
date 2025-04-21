@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`Font changed to: ${selectedFont}`);
     });
 
-    // Apply the selected font size
-    fontSizeRange.addEventListener('input', function() {
+    // Apply the selected font size with debounce
+    fontSizeRange.addEventListener('input', debounce(function() {
         const fontSize = fontSizeRange.value + 'px';
         document.documentElement.style.setProperty('--font-size', fontSize);
         localStorage.setItem('fontSize', fontSize);
         console.log(`Font size changed to: ${fontSize}`);
-    });
+    }, 300));
 
     // Reset font settings
     resetButton.addEventListener('click', function() {
@@ -65,3 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
