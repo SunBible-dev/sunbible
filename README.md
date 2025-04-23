@@ -25,6 +25,7 @@ Project Progress
 - [ ] red letters
 - [ ] bible memory
 - [ ] highlight verses and the ability to save them
+- [ ] installable pwa
 
 
 
